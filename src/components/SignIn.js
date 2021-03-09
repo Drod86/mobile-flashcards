@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Switch, TextInput, KeyboardAvoidView } from 'react-native';
+import { connect } from 'react-redux'
+import { StyleSheet, Text, View, Switch, TextInput, Alert, KeyboardAvoidView, Button } from 'react-native';
+import { setAuthedUser } from '../actions/users'
+import { getData, storeData } from '../utils/api'
 
 class SignIn extends Component {
 	state = {
@@ -22,7 +25,10 @@ class SignIn extends Component {
 	}
 
 	submitSignIn = () => {
-
+		this.props.dispatch(setAuthedUser({
+			username: 'danny',
+			decks: []
+		}))
 	}
 
 	render(){
@@ -41,9 +47,17 @@ class SignIn extends Component {
 						onChangeText={text => this.handleUsername(text)}
 					/>
 				)}
+				<Button title='submit' onPress={() => this.submitSignIn()} />
+				<Button title='see' onPress={() => getData()} />
 			</View>
 		)
 	}
 }
 
-export default SignIn;
+function mapStateToProps(store) {
+	return {
+		store
+	}
+}
+
+export default connect(mapStateToProps)(SignIn);
