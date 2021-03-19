@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Switch, TextInput, Alert, KeyboardAvoidView, Button } from 'react-native';
-import { setAuthedUser } from '../actions/users'
+import { setAuthedUser, addUser } from '../actions/users'
 import { getData, storeData } from '../utils/api'
-
+import { handleInitialData } from '../actions/shared'
 class SignIn extends Component {
+	componentDidMount() {
+    this.props.dispatch(handleInitialData())
+ 	}
+
 	state = {
 		username: '',
 		quized: false,
@@ -25,14 +29,18 @@ class SignIn extends Component {
 	}
 
 	submitSignIn = () => {
-		this.props.dispatch(setAuthedUser({
-			username: 'danny',
+		const user = {
+			username: 'Danny',
 			decks: []
-		}))
+		}
+		this.props.dispatch(addUser(user))
+		this.props.dispatch(setAuthedUser(user))
+		this.props.navigation.navigate('Decks')
 	}
 
 	render(){
 		const { username, showInput } = this.state
+		const { store } = this.props
 		return(
 			<View>
 				<Text>Sign In</Text>
@@ -47,8 +55,11 @@ class SignIn extends Component {
 						onChangeText={text => this.handleUsername(text)}
 					/>
 				)}
-				<Button title='submit' onPress={() => this.submitSignIn()} />
-				<Button title='see' onPress={() => getData()} />
+				<Button title='submit' onPress={() => storeData(store)} />
+				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
+				<Button title='user' onPress={() => this.submitSignIn()} />
+				<Button title='state' onPress={() => console.log(store)} />
+				<Button title='test' onPress={() => getData('STORE')} />
 			</View>
 		)
 	}

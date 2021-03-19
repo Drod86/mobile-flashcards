@@ -13,18 +13,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import reducer from './src/reducers'
 import middleware from './src/middleware'
+import { getData, storeData, clearAl, mergeStore } from './src/utils/api'
+
 
 const Stack = createStackNavigator();
 
 const store = createStore(reducer, middleware)
 
 export default class App extends React.Component {
+
+
+
+
   render() {
+
     return (
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="SignIn">
-          <Stack.Screen name="Sign In" component={SignIn} />
+            <Stack.Screen name="Sign In" component={SignIn} />
             <Stack.Screen name="Decks" component={DecksView} options={{title: 'Dashboard'}}/>
             <Stack.Screen name="Deck" component={DeckView} />
             <Stack.Screen name="Add Deck" component={AddDeckView} />
