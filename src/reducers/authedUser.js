@@ -4,7 +4,7 @@ import { SET_AUTHED_USER }  from '../actions/users'
 export default function authedUser (state = {}, action) {
   switch (action.type) {
     case SET_AUTHED_USER :
-      return {...state, ...action.user}
+      return action.user
     case ADD_DECK :
       return {
         ...state,

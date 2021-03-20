@@ -6,6 +6,7 @@ export const storeData = async (key, store) => {
     await AsyncStorage.setItem(key, jsonValue)
   } catch (e) {
     alert('Store was not updated. Try again')
+    return e;
   }
 }
 
@@ -21,6 +22,7 @@ export const getData = async (key) => {
   } catch(e) {
     // error reading value
     	alert('nope')
+      return e;
   }
 }
 
@@ -29,6 +31,7 @@ export const clearAll = async () => {
     await AsyncStorage.clear()
   } catch(e) {
     // clear error
+    return e;
   }
 
   console.log('Done.')
@@ -39,6 +42,7 @@ export const mergeStore = async (store) => {
 		await AsyncStorage.mergItem('STORE', JSON.stringify(store))
 	} catch (e) {
     alert('Store was not updated. Try again')
+    return e;
   }
 }
 

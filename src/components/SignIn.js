@@ -10,9 +10,12 @@ class SignIn extends Component {
  	}
 
 	state = {
-		username: '',
-		quized: false,
-		decks: [],
+		user : {
+			username: '',
+			password: '',
+			quized: false,
+			decks: [],
+		},
 		showInput: false
 	}
 
@@ -24,27 +27,45 @@ class SignIn extends Component {
 
 	handleUsername = (text) => {
 		this.setState(() => ({
-			username: text
+			user: {...this.state.user,
+				username: text
+			}
 		}))
 	}
 
-	submitSignIn = () => {
-		const user = {
-			username: 'Danny',
-			decks: []
-		}
+	handlePassword = (text) => {
+		this.setState(() => ({
+			user: {...this.state.user,
+				password: text
+			}
+		}))
+	}
+
+	resetForm = () => {
+		this.setState(() => ({
+			user : {
+				username: '',
+				password: '',
+				quized: false,
+				decks: [],
+			}
+		}))
+	}
+
+	submitSignIn = (user) => {
 		this.props.dispatch(addUser(user))
 		this.props.dispatch(setAuthedUser(user))
 		this.props.navigation.navigate('Decks')
+		this.resetForm()
 	}
 
 	render(){
-		const { username, showInput } = this.state
+		const { user, showInput } = this.state
 		const { store } = this.props
 		return(
 			<View>
 				<Text>Sign In</Text>
-				<Switch
+				{/*<Switch
 					value={showInput}
 					onValueChange={this.handleToggleSwitch}
 				/>
@@ -54,8 +75,20 @@ class SignIn extends Component {
 						style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
 						onChangeText={text => this.handleUsername(text)}
 					/>
-				)}
-				<Button title='submit' onPress={() => storeData(store)} />
+				)}*/}
+				<Text>Username:</Text>
+				<TextInput
+					value = {user.username}
+					style = {styles.signInInput}
+					onChangeText = { text => this.handleUsername(text)}
+				/>
+				<Text>Password:</Text>
+				<TextInput
+					value = {user.password}
+					style = {styles.signInInput}
+					onChangeText = { text => this.handlePassword(text)}
+				/>
+				<Button title='submit' onPress={() => this.submitSignIn(user)} />
 				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
 				<Button title='user' onPress={() => this.submitSignIn()} />
 				<Button title='state' onPress={() => console.log(store)} />
@@ -72,3 +105,11 @@ function mapStateToProps(store) {
 }
 
 export default connect(mapStateToProps)(SignIn);
+
+const styles = StyleSheet.create({
+	signInInput: { 
+	  height: 40, 
+	  borderColor: 'gray', 
+	  borderWidth: 1 
+	}
+});
