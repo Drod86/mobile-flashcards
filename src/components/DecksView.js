@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { handleAuthedUserData } from '../actions/shared'
 import { setAuthedUser } from '../actions/users'
+import DeckList from './DeckList'
 
 class DecksView extends Component {
 	componentDidMount() {
@@ -10,29 +11,14 @@ class DecksView extends Component {
  	}
 
 	handleSignOut = () => {
-		this.props.dispatch(setAuthedUser({}))
 		this.props.navigation.navigate('Sign In')
+		//this.props.dispatch(setAuthedUser({}))
 	}
 	render(){
 		return(
 			<View>
 				<Text>Decks View</Text>
-				<Button
-					title='Go to Deck'
-					onPress={() => this.props.navigation.push('Deck')}
-				/>
-				<Button
-					title='Go to Deck'
-					onPress={() => this.props.navigation.push('Deck')}
-				/>
-				<Button
-					title='Go to Deck'
-					onPress={() => this.props.navigation.push('Deck')}
-				/>
-				<Button
-					title='New Deck'
-					onPress={() => this.props.navigation.navigate('Add Deck')}
-				/>
+				<DeckList navigation={this.props.navigation}/>
 				<Button
 					title='Sign Out'
 					onPress={() => this.handleSignOut()}

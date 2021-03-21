@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Switch, TextInput, Alert, KeyboardAvoidView, Bu
 import { setAuthedUser, addUser } from '../actions/users'
 import { getData, storeData } from '../utils/api'
 import { handleInitialData } from '../actions/shared'
+import { set } from 'react-native-reanimated';
 class SignIn extends Component {
 	componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -16,12 +17,12 @@ class SignIn extends Component {
 			quized: false,
 			decks: [],
 		},
-		showInput: false
+		newUser: false
 	}
 
 	handleToggleSwitch = () => {
-		this.setState((prestate) => ({
-			showInput: !prestate.showInput,
+		this.setState((prevState) => ({
+			newUser: !prevState.newUser,
 		}))
 	}
 
@@ -53,8 +54,11 @@ class SignIn extends Component {
 	}
 
 	submitSignIn = (user) => {
-		this.props.dispatch(addUser(user))
-		this.props.dispatch(setAuthedUser(user))
+		this.props.store.users[user.username] === undefined
+		? alert('Creating new user.') &&
+		  this.props.dispatch(addUser(user)) &&
+		  this.props.dispatch(setAuthedUser(user))
+		: this.props.dispatch(setAuthedUser(this.props.store.users[user.username]))
 		this.props.navigation.navigate('Decks')
 		this.resetForm()
 	}
@@ -66,7 +70,7 @@ class SignIn extends Component {
 			<View>
 				<Text>Sign In</Text>
 				{/*<Switch
-					value={showInput}
+					value={newUser}
 					onValueChange={this.handleToggleSwitch}
 				/>
 				{showInput === true && (
@@ -92,7 +96,7 @@ class SignIn extends Component {
 				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
 				<Button title='user' onPress={() => this.submitSignIn()} />
 				<Button title='state' onPress={() => console.log(store)} />
-				<Button title='test' onPress={() => getData('STORE')} />
+				<Button title='test' onPress={() => console.log(getData('Daniel'))} />
 			</View>
 		)
 	}

@@ -4,7 +4,11 @@ import { ADD_DECK, REMOVE_DECK }  from '../actions/decks'
 export default function decks (state = {}, action) {
   switch (action.type) {
     case ADD_DECK :
-      return {...state, ...action.deck}
+      const { deck } = action
+      return {
+        ...state,
+        [deck.name]: deck
+      }
     case REMOVE_DECK :
       let copyState = JSON.parse(JSON.stringify(state))
       delete copyState[action.id]

@@ -8,12 +8,12 @@ export default function authedUser (state = {}, action) {
     case ADD_DECK :
       return {
         ...state,
-        decks: [...state.decks, ...Object.keys(action.deck)]
+        decks: [...state.decks, action.deck.name]
       }
     case REMOVE_DECK :
       return {
         ...state,
-        decks: state.decks.filter(id => id.localeCompare(action.id) !== 0)
+        decks: state.decks.filter(id => id.localeCompare(action.name) !== 0)
       }
     default :
       return state

@@ -13,6 +13,7 @@ export function handleInitialData () {
 }
 
 export function handleAuthedUserData (key) {
+	alert(key)
 	return (dispatch) => {
 		return getData(key === undefined ? 'STORE': key)
 			.then(({ authedUser, cards, decks }) => {

@@ -18,6 +18,16 @@ export default function users (state = {}, action) {
       let copyState = JSON.parse(JSON.stringify(state))
       delete copyState[action.id]
       return copyState
+
+    case ADD_DECK :
+      const { deck } = action
+      return {
+        ...state,
+        [deck.author] : {
+          ...state[deck.author],
+          decks: [...state[deck.author].decks, ...[deck.name]]
+        }
+      }
     default :
       return state
   }
