@@ -1,23 +1,24 @@
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const REMOVE_QUESTION = 'REMOVE_QUESTION'
+export const ADD_CARD = 'ADD_CARD'
+export const REMOVE_CARD = 'REMOVE_CARD'
+export const RECEIVE_CARDS = 'RECEIVE_CARDS'
 
 export function receiveCards (cards) {
   return {
-    type: RECEIVE_USERS,
+    type: RECEIVE_CARDS,
     cards
   }
 }
 
-export function addQuestion (question) {
+export function addCard (card) {
   return {
-    type: ADD_QUESTION,
-    question
+    type: ADD_CARD,
+    card
   }
 }
 
-export function removeQuestion (id) {
+export function removeCard (id) {
   return {
-    type: REMOVE_QUESTION,
+    type: REMOVE_CARD,
     id
   }
 }

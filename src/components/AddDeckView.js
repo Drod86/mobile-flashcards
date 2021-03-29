@@ -22,7 +22,7 @@ class AddDeckView extends Component {
 
 	handleAddDeck = (deck) => {
 		this.props.dispatch(addDeck(deck))
-		this.props.navigation.push('Deck')
+		this.props.navigation.push('Deck', { Deck: deck.name })
 	}
 	
 	render(){

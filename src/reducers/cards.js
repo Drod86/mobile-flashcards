@@ -1,10 +1,15 @@
-import { ADD_QUESTION, REMOVE_QUESTION }  from '../actions/cards'
+import { ADD_CARD, REMOVE_CARD,RECEIVE_CARDS }  from '../actions/cards'
 
-export default function cards (state = [], action) {
+export default function cards (state = {}, action) {
   switch (action.type) {
-    case ADD_QUESTION :
-      return [...state, ...[action.question]]
-    case REMOVE_QUESTION :
+    case RECEIVE_CARDS :
+      return {
+        ...state,
+        ...action.cards
+      }
+    case ADD_CARD :
+      return {...state, ...action.card}
+    case REMOVE_CARD :
       /*let copyState = JSON.parse(JSON.stringify(state))
       delete copyState[action.id.id]
       return copyState*/

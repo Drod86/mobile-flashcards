@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Switch, TextInput, Alert, KeyboardAvoidView, Button } from 'react-native';
 import { setAuthedUser, addUser } from '../actions/users'
-import { getData, storeData } from '../utils/api'
+import { getData, storeData, clearAll } from '../utils/api'
 import { handleInitialData } from '../actions/shared'
 import { set } from 'react-native-reanimated';
 class SignIn extends Component {
@@ -55,7 +55,7 @@ class SignIn extends Component {
 
 	submitSignIn = (user) => {
 		this.props.store.users[user.username] === undefined
-		? alert('Creating new user.') &&
+		? //alert('Creating new user.') &&
 		  this.props.dispatch(addUser(user)) &&
 		  this.props.dispatch(setAuthedUser(user))
 		: this.props.dispatch(setAuthedUser(this.props.store.users[user.username]))
@@ -96,7 +96,8 @@ class SignIn extends Component {
 				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
 				<Button title='user' onPress={() => this.submitSignIn()} />
 				<Button title='state' onPress={() => console.log(store)} />
-				<Button title='test' onPress={() => console.log(getData('Daniel'))} />
+				<Button title='test' onPress={() => getData('Daniel').then(r => console.log(r))} />
+				<Button title='Clearing' onPress={() => clearAll() } />
 			</View>
 		)
 	}

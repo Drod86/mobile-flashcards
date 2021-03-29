@@ -12,12 +12,13 @@ class DecksView extends Component {
 
 	handleSignOut = () => {
 		this.props.navigation.navigate('Sign In')
-		//this.props.dispatch(setAuthedUser({}))
+		this.props.dispatch(setAuthedUser({}))
 	}
 	render(){
+
 		return(
 			<View>
-				<Text>Decks View</Text>
+				<Text>Decks</Text>
 				<DeckList navigation={this.props.navigation}/>
 				<Button
 					title='Sign Out'
