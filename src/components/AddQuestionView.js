@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { addCard } from '../actions/cards'
+import { generateID } from '../utils/api'
 
 class AddQuestionView extends Component {
 	state = {
 		card: {
-			id: this.props.route.params.id,
+			id: generateID(),
 			deck: this.props.route.params.Deck,
 			question: '',
 			answer: ''
@@ -29,16 +30,29 @@ class AddQuestionView extends Component {
 		})
 	}
 
+	clearState = () => {
+		this.setState({
+			card: {
+				id: generateID(),
+				deck: this.props.route.params.Deck,
+				question: '',
+				answer: ''
+			}
+		})
+	}
+
 	handleAddCard = (card) => {
 		this.props.dispatch(addCard(card))
+		this.clearState()
 		this.props.navigation.push('Deck', {Deck: this.props.route.params.Deck})
 	}
 
 	render(){
 		const { card } = this.state
+		const { Deck } = this.props.route.params.Deck
 		return(
 			<View>
-				<Text>Add Card to {this.props.route.params.Deck}</Text>
+				<Text>Add Card to {Deck} deck.</Text>
 				<Text>Question:</Text>
 				<TextInput
 					value = {card.question}

@@ -2,7 +2,6 @@ import { getData } from '../utils/api'
 import { receiveUsers } from './users'
 import { receiveDecks } from './decks'
 import { receiveCards } from './cards'
-import { createDraftSafeSelector } from '@reduxjs/toolkit'
 
 export function handleInitialData () {
 	return (dispatch) => {

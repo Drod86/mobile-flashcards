@@ -15,11 +15,11 @@ class DecksView extends Component {
 		this.props.dispatch(setAuthedUser({}))
 	}
 	render(){
-
+		const { navigation } = this.props
 		return(
 			<View>
 				<Text>Decks</Text>
-				<DeckList navigation={this.props.navigation}/>
+				<DeckList navigation={navigation}/>
 				<Button
 					title='Sign Out'
 					onPress={() => this.handleSignOut()}

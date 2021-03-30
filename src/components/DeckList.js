@@ -7,31 +7,27 @@ import { render } from 'react-dom';
 
 class DeckList extends Component {
     render(){
+        const { myDecks, navigation } = this.props
         const deckAccess = () => {
-            this.props.myDecks.map((d) => {
+            myDecks.map((d) => {
                 return (
                     <Button
                             title={`test ${d}`}
-                            onPress={() => this.props.navigation.push('Deck', { Deck: d })}
+                            onPress={() => navigation.push('Deck', { Deck: d })}
                         />
                 )
             })
         }
         return (
             <View>
-                <Text>Deck List {this.props.myDecks[0]}</Text>
-                {this.props.myDecks.length === 0
-                    ? <View><Text>You do not have any decks.</Text>
-                      
-                      </View>
-                    : <View>{this.props.myDecks.map(d => <Button key={d} title={d} onPress={() => this.props.navigation.push('Deck', {Deck: d})}/>)}</View>}
-                {/*<Button
-                    title='Go to Deck'
-                    onPress={() => this.props.navigation.push('Deck')}
-                />*/}
+                {myDecks.length === 0
+                    ? <View><Text>You do not have any decks.</Text></View>
+                    : <View>{myDecks.map(d => <Button key={d} title={d} onPress={() => navigation.push('Deck', {Deck: d})}/>)}</View>
+                }
+                
                 <Button
                     title='Add Deck'
-                    onPress={() => this.props.navigation.push('Add Deck')}
+                    onPress={() => navigation.push('Add Deck')}
                 />
             </View>
         )

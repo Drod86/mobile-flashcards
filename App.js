@@ -13,20 +13,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import reducer from './src/reducers'
 import middleware from './src/middleware'
-import { getData, storeData, clearAl, mergeStore } from './src/utils/api'
-
 
 const Stack = createStackNavigator();
 
 const store = createStore(reducer, middleware)
 
 export default class App extends React.Component {
-
-
-
-
   render() {
-
     return (
       <Provider store={store}>
         <NavigationContainer>

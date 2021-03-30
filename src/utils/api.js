@@ -10,7 +10,6 @@ export const storeData = async (key, store) => {
   }
 }
 
-
 export const getData = async (key) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key)
@@ -40,22 +39,6 @@ export const mergeStore = async (key, store) => {
   }
 }
 
-export const getDecks = async () => {
-
-}
-
-export const getDeck = async (id) => {
-
-}
-
-export const saveDeckTitle = async (title) => {
-
-}
-
-export const addCardToDeck = async (title, card) => {
-
-}
-
 export function generateID () {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  return Math.floor(Math.random()*Date.now()).toString(36).substring(2, 9)
 }

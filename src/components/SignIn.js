@@ -69,17 +69,6 @@ class SignIn extends Component {
 		return(
 			<View>
 				<Text>Sign In</Text>
-				{/*<Switch
-					value={newUser}
-					onValueChange={this.handleToggleSwitch}
-				/>
-				{showInput === true && (
-					<TextInput
-						value={username}
-						style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-						onChangeText={text => this.handleUsername(text)}
-					/>
-				)}*/}
 				<Text>Username:</Text>
 				<TextInput
 					value = {user.username}
@@ -93,11 +82,12 @@ class SignIn extends Component {
 					onChangeText = { text => this.handlePassword(text)}
 				/>
 				<Button title='submit' onPress={() => this.submitSignIn(user)} />
+				{/*
 				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
 				<Button title='user' onPress={() => this.submitSignIn()} />
 				<Button title='state' onPress={() => console.log(store)} />
 				<Button title='test' onPress={() => getData('Daniel').then(r => console.log(r))} />
-				<Button title='Clearing' onPress={() => clearAll() } />
+				<Button title='Clearing' onPress={() => clearAll() } />*/}
 			</View>
 		)
 	}
