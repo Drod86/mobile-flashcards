@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Switch, TextInput, Alert, KeyboardAvoidView, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import styled from 'styled-components/native'
 import { setAuthedUser, addUser } from '../actions/users'
-import { getData, storeData, clearAll } from '../utils/api'
 import { handleInitialData } from '../actions/shared'
-import { set } from 'react-native-reanimated';
+
 class SignIn extends Component {
 	componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -67,21 +67,21 @@ class SignIn extends Component {
 		const { user, showInput } = this.state
 		const { store } = this.props
 		return(
-			<View>
-				<Text>Sign In</Text>
-				<Text>Username:</Text>
+			<View style = {styles.backgroud}>
+				<Text style = {styles.heading}>Sign In or Register</Text>
+				<Text style = {styles.inputLabel}>Username:</Text>
 				<TextInput
 					value = {user.username}
 					style = {styles.signInInput}
 					onChangeText = { text => this.handleUsername(text)}
 				/>
-				<Text>Password:</Text>
+				<Text style = {styles.inputLabel}>Password:</Text>
 				<TextInput
 					value = {user.password}
 					style = {styles.signInInput}
 					onChangeText = { text => this.handlePassword(text)}
 				/>
-				<Button title='submit' onPress={() => this.submitSignIn(user)} />
+				<Button style = {{height: 30}} title='Sign In' onPress={() => this.submitSignIn(user)} />
 				{/*
 				<Button title='see' onPress={() => getData(Object.keys(store.authedUser).length === 0 ? 'STORE' : store.authedUser.username)} />
 				<Button title='user' onPress={() => this.submitSignIn()} />
@@ -102,9 +102,31 @@ function mapStateToProps(store) {
 export default connect(mapStateToProps)(SignIn);
 
 const styles = StyleSheet.create({
+	backgroud: {
+		height: '100%',
+	},
+	heading: {
+		fontSize: 25,
+		//fontWeight: 'bold',
+		textAlign: 'center',
+		padding: 50,
+		color: 'navy',
+		textShadowColor: 'grey',
+		textShadowOffset: {width: 1, height: 1},
+		textShadowRadius: 5
+	},
+	inputLabel: {
+		paddingLeft: 10
+	},
 	signInInput: { 
 	  height: 40, 
 	  borderColor: 'gray', 
-	  borderWidth: 1 
+	  borderWidth: 1,
+	  borderRadius: 5,
+	  marginHorizontal: 10,
+	  marginVertical: 5
+	},
+	button: {
+		fontFamily: 'script'
 	}
 });

@@ -24,7 +24,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="SignIn">
-            <Stack.Screen name="Sign In" component={SignIn} />
+            <Stack.Screen name="Sign In" component={SignIn} options={{title: 'Time To Study'}}/>
             <Stack.Screen name="Decks" component={DecksView} options={{title: 'Dashboard'}}/>
             <Stack.Screen name="Deck" component={DeckView} />
             <Stack.Screen name="Add Deck" component={AddDeckView} />
